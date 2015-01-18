@@ -17,10 +17,7 @@ public class CameraControl : MonoBehaviour
 
 		void LateUpdate ()
 		{
-				/*Vector3 new_position = this.transform.position;
-				 * new_position.x= this.player.transform.position.x + this.position_offset.x;
-				 * this.transform.position = new_position;
-				*/
+
 		}
 
 		void Update ()
