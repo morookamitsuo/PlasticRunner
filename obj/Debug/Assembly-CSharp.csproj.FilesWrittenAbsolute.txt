@@ -1,0 +1,6 @@
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/UnityEngine.dll
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/UnityEditor.dll
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/Mono.Cecil.dll
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/nunit.framework.dll
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/Unity.DataContract.dll
+/Users/morookamitsuo1/Documents/UnityProjects/PlasticRunner/PlasticRunner/Temp/bin/Debug/ICSharpCode.NRefactory.dll
