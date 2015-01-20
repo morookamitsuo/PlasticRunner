@@ -16,8 +16,8 @@ public class BlockControl : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				if (this.map_creator.isDelete (this.gameObject)) { // 
-						GameObject.Destroy (this.gameObject); // 
+				if (this.map_creator.isDelete (this.gameObject)) { // 見切れているなら
+						GameObject.Destroy (this.gameObject); // 自分自身を削除。
 				}
 	
 		}
