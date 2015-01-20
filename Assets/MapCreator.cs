@@ -80,4 +80,20 @@ public class MapCreator : MonoBehaviour
 				// ブロック作成済みなので、lastblockのiscreatedをtrueに。
 				this.last_block.is_created = true;
 		}
+
+		public bool isDelete (GameObject block_object)
+		{
+				bool ret = false; // 戻り値
+
+				// Player から、画面半分、左の位置
+				// これが、消えるべきか田舎を決める閾値となる
+				float left_limit = this.player.transform.position.x - BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
+
+				// ブロックの位置が閾値より小さい（左）なら、
+				if (block_object.transform.position.x < left_limit) {
+						ret = true; // 戻り値をtrue(消えてよし)に。
+				}
+
+				return(ret); // 判定結果を返す。
+		}
 }
