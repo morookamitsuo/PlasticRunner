@@ -27,8 +27,5 @@ public class BlockCreator : MonoBehaviour
 
 				go.transform.position = block_position; // ブロックの位置を移動
 				this.block_count++; // ブロックの個数をインクリメント。
-
 		}
-
-
 }

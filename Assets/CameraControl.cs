@@ -24,9 +24,8 @@ public class CameraControl : MonoBehaviour
 		{
 				// カメラの現在位置をnew_positionに取得
 				Vector3 new_position = this.transform.position;
-				Debug.Log ("camera position= " + new_position);
 
-				// プレイヤーのX座標に差分を足して、変数new_positionのXに代入する。
+		        // プレイヤーのX座標に差分を足して、変数new_positionのXに代入する。
 				new_position.x = player.transform.position.x + this.position_offset.x;
 				// カメラの位置を、新しい位置(new_position)に更新。
 				this.transform.position = new_position;
