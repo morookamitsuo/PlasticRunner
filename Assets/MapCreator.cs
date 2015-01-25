@@ -1,6 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class Block{
+		// ブロックの種類を表す列挙体
+		public enum TYPE{
+				NONE = -1, // なし
+				FLOOR = 0, // 床
+				HOLE,      // 穴
+				NUM,       // ブロックが何種類あるかを示す（＝２）
+		};
+};
+
 public class MapCreator : MonoBehaviour
 {
 
@@ -10,6 +20,8 @@ public class MapCreator : MonoBehaviour
 		// ブロックの高さ
 		public static int BLOCK_NUM_IN_SCREEN = 24;
 		// 画面内に収まるブロックの個数
+
+		private LevelControl level_control = null;
 
 		// ブロックに関する情報をまとめて管理するための構造体
 		private struct FloorBlock
@@ -33,6 +45,9 @@ public class MapCreator : MonoBehaviour
 				this.player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerControl> ();
 				this.last_block.is_created = false;
 				this.block_creator = this.gameObject.GetComponent<BlockCreator> ();
+
+				this.level_control = new LevelControl ();
+				this.level_control.initialize ();
 		}
 
 	
@@ -73,7 +88,22 @@ public class MapCreator : MonoBehaviour
 
 				// blockCreatorスクリプトのcreateBlock()メソッドに作成指示！
 				// これまでのコードで設定したblock_positionを渡す
-				this.block_creator.createBlock (block_position);
+				//this.block_creator.createBlock (block_position);
+
+				this.level_control.update (); // LevelControlを更新
+
+				// level_controlJに置かれたcurrent_block（今作るブロックの情報）の
+				// height(高さ)を、シーン上の座標に変換
+				block_position.y = level_control.current_block.height * BLOCK_HEIGHT;
+
+				// 今回作るブロックに関する情報を変数currentに収める
+				LevelControl.CreationInfo current = this.level_control.current_block;
+
+				// 今回作るブロックが床なら
+				if(current.block_type == Block.TYPE.FLOOR){
+						// block_positionの位置に、ブロックを実際に作成
+						this.block_creator.createBlock (block_position);
+				}
 
 				//last_blockの位置を、今回の位置に更新。
 				this.last_block.position = block_position;

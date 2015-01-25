@@ -9,6 +9,8 @@ public class PlayerControl : MonoBehaviour {
 		public static float JUMP_HEIGHT_MAX = 3.0f; // ジャンプの高さ
 		public static float JUMP_KEY_RELEASE_REDUCE = 0.5f; // ジャンプからの減速値
 
+		public static float NARAKU_HEIGHT = -5.0f;
+
 		public enum STEP // Playerの各種状態を表すデータ型
 		{
 				NONE = -1, // 状態情報なし
@@ -33,6 +35,17 @@ public class PlayerControl : MonoBehaviour {
 		void Update () {
 				Vector3 velocity = this.rigidbody.velocity; // 速度を設定
 				this.check_landed ();                       // 着地状態かどうかをチェック
+
+				switch(this.step){
+				case STEP.RUN:
+				case STEP.JUMP:
+						// 現在の位置が閾値よりも下ならば
+						if (this.transform.position.y < NARAKU_HEIGHT) {
+								this.next_step = STEP.MISS; // 「ミス」状態にする
+						}
+						break;
+				}
+
 				this.step_timer += Time.deltaTime;          // 経過時間を進める
 
 				// 「次の状態」が決まっていなければ、状態の変化を調べる
@@ -108,6 +121,14 @@ public class PlayerControl : MonoBehaviour {
 								this.is_key_released = true;
 
 						} while(false);
+						break;
+
+				case STEP.MISS: // ミスした場合
+						// 加速値(ACCELERRATION)を引き算して、Playerの速度を遅くしていく
+						velocity.x -= PlayerControl.ACCELATION * Time.deltaTime;
+						if (velocity.x < 0.0f) {     // Playerの速度が負の数なら
+								velocity.x = 0.0f; // ゼロにする
+						}
 						break;
 				}
 				// Rigidbodyの速度を、上記で求めた速度で更新
