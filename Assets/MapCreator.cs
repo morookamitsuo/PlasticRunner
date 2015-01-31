@@ -13,13 +13,19 @@ public class Block{
 
 public class MapCreator : MonoBehaviour
 {
-
+		#region public
 		public static float BLOCK_WIDTH = 1.0f;
 		// ブロックの幅
 		public static float BLOCK_HEIGHT = 0.2f;
 		// ブロックの高さ
 		public static int BLOCK_NUM_IN_SCREEN = 24;
 		// 画面内に収まるブロックの個数
+
+		public TextAsset level_data_text = null;
+
+		#endregion
+
+		#region private
 
 		private LevelControl level_control = null;
 
@@ -39,6 +45,9 @@ public class MapCreator : MonoBehaviour
 		private BlockCreator block_creator;
 		// BlockCreatorを保管
 
+		private GameRoot game_root = null;
+
+		#endregion
 	
 		void Start ()
 		{
@@ -48,6 +57,12 @@ public class MapCreator : MonoBehaviour
 
 				this.level_control = new LevelControl ();
 				this.level_control.initialize ();
+
+				this.level_control.loadLevelData (this.level_data_text);
+
+				this.game_root = this.gameObject.GetComponent<GameRoot> ();
+
+				this.player.level_control = this.level_control;
 		}
 
 	
@@ -89,8 +104,8 @@ public class MapCreator : MonoBehaviour
 				// blockCreatorスクリプトのcreateBlock()メソッドに作成指示！
 				// これまでのコードで設定したblock_positionを渡す
 				//this.block_creator.createBlock (block_position);
-
-				this.level_control.update (); // LevelControlを更新
+				//this.level_control.update (); // LevelControlを更新
+				this.level_control.update (this.game_root.getPlayTime()); // LevelControlを更新
 
 				// level_controlJに置かれたcurrent_block（今作るブロックの情報）の
 				// height(高さ)を、シーン上の座標に変換

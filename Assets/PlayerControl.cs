@@ -24,6 +24,10 @@ public class PlayerControl : MonoBehaviour {
 		public STEP next_step = STEP.NONE; // Playerの次の状態
 
 		public float step_timer = 0.0f;    // 経過時間
+
+		public float current_speed = 0.0f; // 現在のスピード
+		public LevelControl level_control = null; // LevelControlJを保持
+
 		private bool is_landed = false;    // 着地しているかどうか
 		private bool is_collided = false;  // 何かとぶつかっているかどうか
 		private bool is_key_released = false; // ボタンが離されているかどうか
@@ -34,10 +38,20 @@ public class PlayerControl : MonoBehaviour {
 
 		void Update () {
 				Vector3 velocity = this.rigidbody.velocity; // 速度を設定
+				this.current_speed = this.level_control.getPlayerSpeed ();
 				this.check_landed ();                       // 着地状態かどうかをチェック
 
 				switch(this.step){
 				case STEP.RUN:
+						velocity.x += PlayerControl.ACCELATION * Time.deltaTime;
+
+						// 計算で求めたスピードが、設定すべきスピードを超えていたら
+						if (Mathf.Abs (velocity.x) > this.current_speed) {
+								// 超えないうに調整する
+								velocity.x *= this.current_speed / Mathf.Abs (velocity.x);
+						}
+						break;
+
 				case STEP.JUMP:
 						// 現在の位置が閾値よりも下ならば
 						if (this.transform.position.y < NARAKU_HEIGHT) {

@@ -39,6 +39,8 @@
 'Assets/BlockControl.cs'
 'Assets/BlockCreator.cs'
 'Assets/CameraControl.cs'
+'Assets/GameRoot.cs'
+'Assets/LevelControl.cs'
 'Assets/MapCreator.cs'
 'Assets/PlayerControl.cs'
 'Assets/ShaderForge/Example Assets/Scripts/EditorLabel.cs'
