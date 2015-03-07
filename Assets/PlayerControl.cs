@@ -226,4 +226,15 @@ public class PlayerControl : MonoBehaviour
 				} while(false);
 				// ループの脱出口
 		}
+
+		public bool isPlayEnd () // ゲームが終わったかどうかを判定する
+		{ 
+				bool ret = false;
+				switch (this.step) {
+				case STEP.MISS: // MISS状態なら
+						ret = true; // 「死んだよー」(true)と返す。
+						break;
+				}
+				return(ret);
+		}
 }
