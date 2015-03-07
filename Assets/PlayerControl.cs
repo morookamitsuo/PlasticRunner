@@ -123,9 +123,6 @@ public class PlayerControl : MonoBehaviour
 										}
 
 								}
-
-
-
 								break;
 						case STEP.JUMP:              // ジャンプ中の場合
 								if (this.is_landed) {
